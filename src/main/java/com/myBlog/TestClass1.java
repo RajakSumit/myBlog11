@@ -41,7 +41,49 @@ public class TestClass1 {
 //        System.out.println("Binary Data:" +newData);
 
 
+//        List<Login> logins = Arrays.asList(
+//                new Login("sumit", "testing"),
+//                new Login("rahul", "testing"),
+//                new Login("arbaaz", "testing")
+//
+//        );
+//
+//        Stream<loginDto> dtos = logins.stream().map(login -> mapToDto(login));
+//        System.out.println(dtos);
+//
+//
+//    }
+//
+//
+//   static loginDto mapToDto(Login login){
+//
+//        loginDto dto = new loginDto();
+//        dto.setUserName(login.getUserName());
+//        dto.setPassword(login.getPassword());
+//        return dto;
+
+
+        List<Login> logins = Arrays.asList(
+                new  Login("Jonathan", "testing"),
+                new Login("Sumit", "testing"),
+                new Login("Rahul", "testing")
+        );
+
+        List<LoginDto> dtos = logins.stream().map(login -> mapToDto(login)).collect(Collectors.toList());
+        System.out.println(dtos);
+
+
     }
+
+    static LoginDto mapToDto(Login login){
+        LoginDto dto = new LoginDto();
+        dto.setUserName(login.getUserName());
+        dto.setPassword(login.getPassword());
+
+        return dto;
+
+    }
+
 
 
 }

@@ -13,10 +13,15 @@ public class TestClass2 {
 //        to sort them in descending order.
 
 
-        List<Integer> numbers = Arrays.asList(1, 5, 8, 9, 5, 2, 2, 3, 4);
-        List<Integer> newNumbers = numbers.stream().sorted((a,b)->b.compareTo(a)).collect(Collectors.toList());
-        System.out.println("Given List:"+numbers);
-        System.out.println("New Numbers:"+newNumbers);
+//        List<Integer> numbers = Arrays.asList(1, 5, 8, 9, 5, 2, 2, 3, 4);
+//        List<Integer> newNumbers = numbers.stream().sorted((a,b)->b.compareTo(a)).collect(Collectors.toList());
+//        System.out.println("Given List:"+numbers);
+//        System.out.println("New Numbers:"+newNumbers);
+
+
+
+
+
 
 
     }
