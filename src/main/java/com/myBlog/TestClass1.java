@@ -11,6 +11,25 @@ public class TestClass1 {
 
     public static void main(String[] args) {
 
+//        int age = 15;
+//
+//        String status = (age>=20)?"Adult":"Minor";
+//
+//        System.out.println(status);
+
+
+//        int [] numbers = {10,20,45,30,88};
+//        for ( int num:numbers){
+//            String message = (num%2==0)?"Even":"Odd";
+//            System.out.println(num+ "is" +message);
+
+//        }
+
+
+//        String name = "john";
+//        String message = (name!=null)?"Hello "+name:"Hello Guest";
+//        System.out.println(message);
+
         // to find square Root of numbers
 //        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 //        List<Integer> squaredNumbers = numbers.stream().map(i -> i * i).collect(Collectors.toList());
@@ -83,6 +102,12 @@ public class TestClass1 {
         return dto;
 
     }
+
+
+
+
+
+
 
 
 
