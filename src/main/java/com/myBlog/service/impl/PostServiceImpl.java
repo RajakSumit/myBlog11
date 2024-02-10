@@ -76,6 +76,11 @@ public class PostServiceImpl implements PostService {
         return dtos;
     }
 
+    @Override
+    public void deletePpost(long Id) {
+        postRepository.deleteById(Id);
+    }
+
     PostDto mapToDto(Post post){
 
         PostDto dto = modelMapper.map(post, PostDto.class);
