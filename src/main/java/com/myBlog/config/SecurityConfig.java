@@ -1,9 +1,13 @@
 package com.myBlog.config;
 
+import com.myBlog.security.CustomUserDetailsService;
 import jdk.internal.dynalink.support.NameCodec;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,8 +25,13 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 //by giving this annotation only we can use @PreAuthorize("hasRole('ADMIN')") in PostMapping Method in post controller
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
+
     @Bean
     PasswordEncoder passwordEncoder(){
+
         return new BCryptPasswordEncoder();
     }
 
@@ -34,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/api/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/auth/signup").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/auth/signup").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -42,19 +51,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
+    }
+
+    @Override
     @Bean
-    protected UserDetailsService userDetailsService() {
-        UserDetails user = User.builder().username("Sumit").password(passwordEncoder()
-                .encode("password")).roles("USER").build();
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
-        UserDetails Admin = User.builder().username("admin").password(passwordEncoder()
-                .encode("admin")).roles("ADMIN").build();
-
-        return new InMemoryUserDetailsManager(user,Admin);
+//    @Override
+//    @Bean
+//    protected UserDetailsService userDetailsService() {
+//        UserDetails user = User.builder().username("Sumit").password(passwordEncoder()
+//                .encode("password")).roles("USER").build();
+//
+//        UserDetails Admin = User.builder().username("admin").password(passwordEncoder()
+//                .encode("admin")).roles("ADMIN").build();
+//
+//        return new InMemoryUserDetailsManager(user,Admin);
 
 
     }
 
 
 
-}
+
